@@ -1,23 +1,12 @@
 package files;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 
-// Gérer les fichiers .txt
+// Gérer les fichiers .txt et dossier
 
 public class ManageFiles {
 
-    private static String scanF(String txt){
-        try {
-            System.out.println(txt);
-            BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-            return bufferRead.readLine();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
+    private static String fileName = "avl";
 
     public static void createFolder(){
         File file = new File("AVL/ressources");
@@ -33,12 +22,11 @@ public class ManageFiles {
     public static void createFile(){
         createFolder();
         try {
-            String name = scanF("Entrez le nom du fichier que vous voulez créer: ");
-            File f = new File("AVL/ressources\\"+name+".txt");
+            File f = new File("AVL/ressources\\"+fileName+".txt");
             if (f.createNewFile())
-                System.out.println("File "+name+" has been created.");
+                System.out.println("File "+fileName+" has been created.");
             else {
-                System.out.println("File "+name+" already exist.");
+                System.out.println("File "+fileName+" already exist.");
             }
         }
         catch (Exception e) {
@@ -48,8 +36,7 @@ public class ManageFiles {
 
     public static void removeFile(){
         try{
-            String name = scanF("Entrez le nom du fichier que vous voulez supprimé: ");
-            File file = new File("AVL/ressources\\"+name+".txt");
+            File file = new File("AVL/ressources\\"+fileName+".txt");
             if(file.delete()){
                 System.out.println(file.getName() + " est supprimé.");
             }else{
