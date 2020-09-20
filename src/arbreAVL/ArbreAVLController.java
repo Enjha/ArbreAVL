@@ -1,9 +1,7 @@
 
 package arbreAVL;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,20 +10,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 
 public class ArbreAVLController {
 
+    public AnchorPane panel;
     ArbreAVL aavl=null;
 
     @FXML
     private Label label;
-    @FXML
-    private Label label2;
 
     @FXML
     private TextField champ_text1;
-    @FXML
+    /*@FXML
     private TextField champ_text2;
     @FXML
     private Button btn11;
@@ -36,14 +32,14 @@ public class ArbreAVLController {
     @FXML
     private Button btn3;
     @FXML
-    private Button btn4;
+    private Button btn4;*/
     @FXML
     private AnchorPane pan;
 
 
     //Permet de générer un arbre AVL équilibré avec des valeurs aléatoires.
     @FXML
-    private void genererUNArbreAction(ActionEvent event) {
+    private void genererUNArbreAction() {
         aavl = null;
         //On ajoute 25 valeurs ici, cela est modifiable.
         for(int i=0;i<25;i++)
@@ -58,7 +54,7 @@ public class ArbreAVLController {
 
     //Permet d'ajouter un élément entré par l'utilisateur dans la zone de texte.
     @FXML
-    private void ajouterElem(ActionEvent event) {
+    private void ajouterElem() {
         int numbre=Integer.parseInt(champ_text1.getText()); //Récupère le texte entré par l'utilisateur.
         aavl = ArbreAVL.inserer(aavl,numbre);               //Insère la valeur.
         label.setText("le nombre "+numbre+" a été ajouté"); //Informe que la valeur a été ajoutée.
@@ -67,7 +63,7 @@ public class ArbreAVLController {
 
     //Permet de supprimer un élément, entré par l'utilisateur, de l'arbre.
     @FXML
-    private void supprimerElem(ActionEvent event) {
+    private void supprimerElem() {
         int numbre=Integer.parseInt(champ_text1.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
             aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
@@ -80,7 +76,7 @@ public class ArbreAVLController {
 
     //Permet d'effacer l'arbre généré.
     @FXML
-    private void reinitialiserArbre(ActionEvent event) {
+    private void reinitialiserArbre() {
         aavl = null;
         pan.getChildren().clear();
         label.setText("L'arbre a été rénisialisée");
@@ -99,7 +95,7 @@ public class ArbreAVLController {
 
     //Fonction permettant de tracer l'arbre
     private float tracer_aAVL(float x1,float x2,ArbreAVL a,float y){
-        float xd=0,xg=0;
+        float xd = 0, xg = 0;
 
         int nbFeuille = ArbreAVL.GetnbFeuille(a);
         if(nbFeuille == 0)
