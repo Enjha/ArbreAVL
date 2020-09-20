@@ -2,6 +2,7 @@
 package arbreAVL;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,8 +24,9 @@ public class ArbreAVLController {
     private TextField champ_text1;
     /*@FXML
     private TextField champ_text2;
-    @FXML
+    */@FXML
     private Button btn11;
+
     @FXML
     private Button btn13;
     @FXML
@@ -32,7 +34,7 @@ public class ArbreAVLController {
     @FXML
     private Button btn3;
     @FXML
-    private Button btn4;*/
+    private Button btn4;
     @FXML
     private AnchorPane pan;
 
