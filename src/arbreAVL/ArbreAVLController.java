@@ -41,45 +41,50 @@ public class ArbreAVLController {
     private AnchorPane pan;
 
 
+    //Permet de générer un arbre AVL équilibré avec des valeurs aléatoires.
     @FXML
     private void genererUNArbreAction(ActionEvent event) {
         aavl = null;
+        //On ajoute 25 valeurs ici, cela est modifiable.
         for(int i=0;i<25;i++)
         {
-            int n= (int)Math.ceil(Math.random()*1000);
-            aavl =ArbreAVL.inserer(aavl,n);
+            int n= (int)Math.ceil(Math.random()*50);    //Ajoute la valeur "n" qui contiendra un entier aléatoire compris
+                                                        // entre 1 et 51.
+            aavl =ArbreAVL.inserer(aavl,n);             //Insère les valeurs.
         }
-
-        tracer_aAVL(aavl,null);
-        label.setText("L'arbre a été générée");
+        tracer_aAVL(aavl,null);                      //Permet de tracer l'arbre.
+        label.setText("L'arbre a été générée");         //Informe l'executeur que l'arbre est généré.
     }
 
+    //Permet d'ajouter un élément entré par l'utilisateur dans la zone de texte.
     @FXML
     private void ajouterElem(ActionEvent event) {
-        int numbre=Integer.parseInt(champ_text1.getText());
-        aavl = ArbreAVL.inserer(aavl,numbre);
-        label.setText("le nombre "+numbre+" a été ajouté");
+        int numbre=Integer.parseInt(champ_text1.getText()); //Récupère le texte entré par l'utilisateur.
+        aavl = ArbreAVL.inserer(aavl,numbre);               //Insère la valeur.
+        label.setText("le nombre "+numbre+" a été ajouté"); //Informe que la valeur a été ajoutée.
         tracer_aAVL(aavl,null);
     }
 
+    //Permet de supprimer un élément, entré par l'utilisateur, de l'arbre.
     @FXML
     private void supprimerElem(ActionEvent event) {
         int numbre=Integer.parseInt(champ_text1.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
-            aavl = ArbreAVL.supprimer(aavl,numbre);
+            aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
             tracer_aAVL(aavl,null);
-            label.setText("Le nombre à été supprimé");
+            label.setText("Le nombre à été supprimé");      //Informe que la valeur a été supprimée.
         }
+        //Si elle n'existe pas dans l'arbre, l'utilisateur est informé.
         else label.setText("Ce nombre n'existe pas dans l'arbre");
-
     }
+
+    //Permet d'effacer l'arbre généré.
     @FXML
     private void reinitialiserArbre(ActionEvent event) {
         aavl = null;
         pan.getChildren().clear();
         label.setText("L'arbre a été rénisialisée");
     }
-
 
 
     private void tracer_aAVL(ArbreAVL a,Comparable o){
@@ -90,10 +95,9 @@ public class ArbreAVLController {
             else
                 tracer_after_search(0,(float)pan.getWidth()-20,a,40,o);
         }
-
-
     }
 
+    //Fonction permettant de tracer l'arbre
     private float tracer_aAVL(float x1,float x2,ArbreAVL a,float y){
         float xd=0,xg=0;
 
@@ -130,7 +134,6 @@ public class ArbreAVLController {
         if(nbFeuilleG == 0)
             nbFeuilleG =1;
 
-
         float x = (nbFeuilleG*100/nbFeuille)*(x2-x1)/100 + x1;
 
         if(a.contenu.equals(o)) {
@@ -143,7 +146,6 @@ public class ArbreAVLController {
         }
         tracer_cercle(x,y,a.contenu);
 
-
         if( a.filsD != null){
             xd =tracer_after_search(x, x2, a.filsD, y+50,o);
             tracer_droite(x+15, y+8, xd, y+35);
@@ -154,12 +156,10 @@ public class ArbreAVLController {
             tracer_droite(x-15, y+8, xg, y+35);
         }
         return x;
-
     }
 
-
+    //Permet de créer le cercle autour de la valeur.
     private void tracer_cercle(float x,float y,Comparable info){
-
         Circle cercle=new Circle(x,y,15);
         Label label = new Label(""+info);
         if(Integer.parseInt(info.toString())<100)
@@ -170,6 +170,8 @@ public class ArbreAVLController {
         pan.getChildren().add(cercle);
         pan.getChildren().add(label);
     }
+
+    //Permet de montrer le lien entre les valeurs par un trait.
     private void tracer_droite(float x1,float y1,float x2,float y2){
         Line line = new Line();
         line.setStartX(x1);
