@@ -2,11 +2,11 @@ package arbreAVL;
 
 public class ArbreAVL{
 
-    Comparable contenu;
+    Comparable<Comparable<?>> contenu;
     int haut;
     ArbreAVL filsG,filsD;
 
-    ArbreAVL(Comparable c, ArbreAVL filsG, ArbreAVL filsD){
+    ArbreAVL(Comparable<Comparable<?>> c, ArbreAVL filsG, ArbreAVL filsD){
         this.contenu = c;
         this.filsG= filsG;
         this. filsD= filsD;
@@ -14,7 +14,7 @@ public class ArbreAVL{
     }
 
     // Initialise le contenu à vide.
-    public ArbreAVL(Comparable contenu){
+    public ArbreAVL(Comparable<Comparable<?>> contenu){
         this(contenu,null,null);
     }
 
@@ -25,11 +25,14 @@ public class ArbreAVL{
         return 1+Math.max(hauteur(a.filsG),hauteur(a.filsD));
     }
 
+    /*
     public static void prefixe(ArbreAVL a){
         if (a!=null) {
             System.out.print(a.contenu +" "); prefixe(a.filsG); prefixe(a.filsD);
         }
     }
+    */
+
 
     // Permet de calculer la hauteur de l'arbre.
     private static void calculerHauteur(ArbreAVL a){
@@ -45,14 +48,12 @@ public class ArbreAVL{
     private static ArbreAVL equilbreG(ArbreAVL a){
         ArbreAVL b= a.filsD;
         ArbreAVL c = new ArbreAVL(a.contenu, a.filsG, b.filsG);
-        ArbreAVL r=new ArbreAVL(b.contenu,c,b.filsD);
-        return r;
+        return new ArbreAVL(b.contenu,c,b.filsD);
     }
     private static ArbreAVL equilibreD(ArbreAVL a){
         ArbreAVL c = a.filsG;
         ArbreAVL b = new ArbreAVL(a.contenu, c.filsD, a.filsD);
-        ArbreAVL r=new ArbreAVL(c.contenu, c.filsG,b);
-        return r;
+        return new ArbreAVL(c.contenu, c.filsG,b);
     }
     private static ArbreAVL equilibrer(ArbreAVL a){
         calculerHauteur(a);
@@ -82,10 +83,10 @@ public class ArbreAVL{
     }
 
     // Permet d'insérer une valeur demandée :
-    public static ArbreAVL inserer(ArbreAVL a, Comparable x){
+    public static ArbreAVL inserer(ArbreAVL a, Comparable<?> x){
         // Si l'arbre est vide alors on en créé un avec comme première valeur x.
         if (a == null)
-            return new ArbreAVL(x);
+            return new ArbreAVL((Comparable<Comparable<?>>) x);
         // S'il existe déjà alors on insère la valeur x à l'emplacement qui convient en utilisant la fonction
         // CompareTo. Cela permet de l'ajouter à la fin de l'arbre sans penser à l'équilibrage mais à gauche si plus
         // petit ou à droite si plus grand.
@@ -99,10 +100,10 @@ public class ArbreAVL{
     }
 
     // On supprime une valeur demandée :
-    public static ArbreAVL supprimer(ArbreAVL a, Comparable x){
+    public static ArbreAVL supprimer(ArbreAVL a, Comparable<?> x){
 
         // On vérifie que la valeur entrée est égale à une valeur de l'abre si non on la retourne.
-        if(a==null)return a;
+
         if(a.contenu.compareTo(x)==0)
             return supprimerRacine(a);
         if(a.contenu.compareTo(x) > 0)
@@ -115,7 +116,7 @@ public class ArbreAVL{
     }
 
     // Permet de chercher une valeur demandée :
-    public static boolean chercher(ArbreAVL a , Comparable x){
+    public static boolean chercher(ArbreAVL a , Comparable<?> x){
         //On vérifie que la valeur demandée est présente dans l'arbre. Si oui, on la trouve, si non, on retourne faux.
         if(a== null)
             return false;
