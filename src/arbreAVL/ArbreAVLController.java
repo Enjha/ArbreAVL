@@ -24,7 +24,8 @@ public class ArbreAVLController {
     private TextField champ_text1;
     /*@FXML
     private TextField champ_text2;
-    */@FXML
+    */
+    @FXML
     private Button btn11;
 
     @FXML
@@ -50,7 +51,7 @@ public class ArbreAVLController {
                                                         // entre 1 et 51.
             aavl =ArbreAVL.inserer(aavl,n);             //Insère les valeurs.
         }
-        tracer_aAVL(aavl,null);                      //Permet de tracer l'arbre.
+        tracer_aAVL(aavl);                      //Permet de tracer l'arbre.
         label.setText("L'arbre a été générée");         //Informe l'executeur que l'arbre est généré.
     }
 
@@ -60,7 +61,7 @@ public class ArbreAVLController {
         int numbre=Integer.parseInt(champ_text1.getText()); //Récupère le texte entré par l'utilisateur.
         aavl = ArbreAVL.inserer(aavl,numbre);               //Insère la valeur.
         label.setText("le nombre "+numbre+" a été ajouté"); //Informe que la valeur a été ajoutée.
-        tracer_aAVL(aavl,null);
+        tracer_aAVL(aavl);
     }
 
     //Permet de supprimer un élément, entré par l'utilisateur, de l'arbre.
@@ -69,7 +70,7 @@ public class ArbreAVLController {
         int numbre=Integer.parseInt(champ_text1.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
             aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
-            tracer_aAVL(aavl,null);
+            tracer_aAVL(aavl);
             label.setText("Le nombre à été supprimé");      //Informe que la valeur a été supprimée.
         }
         //Si elle n'existe pas dans l'arbre, l'utilisateur est informé.
@@ -85,20 +86,14 @@ public class ArbreAVLController {
     }
 
 
-    private void tracer_aAVL(ArbreAVL a,Comparable o){
+    private void tracer_aAVL(ArbreAVL a){
         if(a != null){
             pan.getChildren().clear();
-            if(o==null)
-                tracer_aAVL(0,(float)pan.getWidth()-20,a,40);
-            else
-                tracer_after_search(0,(float)pan.getWidth()-20,a,40,o);
+            tracer_aAVL(0,(float)pan.getWidth()-20,a,40);
         }
     }
 
-    //Fonction permettant de tracer l'arbre
-    private float tracer_aAVL(float x1,float x2,ArbreAVL a,float y){
-        float xd = 0, xg = 0;
-
+    private float position(float x1, float x2, ArbreAVL a){
         int nbFeuille = ArbreAVL.GetnbFeuille(a);
         if(nbFeuille == 0)
             nbFeuille =1;
@@ -106,7 +101,13 @@ public class ArbreAVLController {
         if(nbFeuilleG == 0)
             nbFeuilleG =1;
 
-        float x = (nbFeuilleG*100/nbFeuille)*(x2-x1)/100 + x1 ;
+        return ((nbFeuilleG*100/nbFeuille)*(x2-x1)/100 + x1) ;
+    }
+
+    //Fonction permettant de tracer l'arbre
+    private float tracer_aAVL(float x1,float x2,ArbreAVL a,float y){
+        float xd, xg;
+        float x = position(x1, x2, a);
         //après le calcule de la postion du noeud actuel je trace la cercle
         tracer_cercle(x,y,a.contenu);
 
@@ -123,16 +124,10 @@ public class ArbreAVLController {
         return x;
     }
 
+    //Permet de montrer la valeur cherchée.
     private float tracer_after_search(float x1,float x2,ArbreAVL a,float y,Comparable o){
-        float xd=0,xg=0;
-        int nbFeuille = ArbreAVL.GetnbFeuille(a);
-        if(nbFeuille == 0)
-            nbFeuille =1;
-        int nbFeuilleG = ArbreAVL.GetnbFeuille(a.filsG);
-        if(nbFeuilleG == 0)
-            nbFeuilleG =1;
-
-        float x = (nbFeuilleG*100/nbFeuille)*(x2-x1)/100 + x1;
+        float xd, xg;
+        float x = position(x1, x2, a);
 
         if(a.contenu.equals(o)) {
             ImageView im = new ImageView(new Image("new.gif"));
