@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("aavl.fxml")));
+        Parent root = FXMLLoader.load(getClass().getResource("aavl.fxml"));
         primaryStage.getIcons().add(new Image("avl.png"));
         primaryStage.setScene(new Scene(root, 1000, 650));
         primaryStage.setResizable(false);
