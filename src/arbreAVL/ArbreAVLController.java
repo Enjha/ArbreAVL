@@ -84,6 +84,7 @@ public class ArbreAVLController {
             tracer_aAVL(aavl);
             label.setText("La valeur à été supprimé");      //Informe que la valeur a été supprimée.
         }
+
         //Si elle n'existe pas dans l'arbre, l'utilisateur est informé.
         else label.setText("Cette valeur n'existe pas dans l'arbre");
     }
