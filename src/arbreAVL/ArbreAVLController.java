@@ -1,6 +1,7 @@
 
 package arbreAVL;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,15 +20,12 @@ public class ArbreAVLController {
 
     @FXML
     private Label label;
-
     @FXML
     private TextField champ_text1;
-    /*@FXML
-    private TextField champ_text2;
-    */
     @FXML
     private Button btn11;
-
+    @FXML
+    private Button btn12;
     @FXML
     private Button btn13;
     @FXML
@@ -35,25 +33,7 @@ public class ArbreAVLController {
     @FXML
     private Button btn3;
     @FXML
-    private Button btn4;
-    @FXML
     private AnchorPane pan;
-
-
-    //Permet de générer un arbre AVL équilibré avec des valeurs aléatoires.
-    @FXML
-    private void genererUNArbreAction() {
-        aavl = null;
-        //On ajoute 25 valeurs ici, cela est modifiable.
-        for(int i=0;i<25;i++)
-        {
-            int n= (int)Math.ceil(Math.random()*50);    //Ajoute la valeur "n" qui contiendra un entier aléatoire compris
-                                                        // entre 1 et 51.
-            aavl =ArbreAVL.inserer(aavl,n);             //Insère les valeurs.
-        }
-        tracer_aAVL(aavl);                      //Permet de tracer l'arbre.
-        label.setText("L'arbre a été générée");         //Informe l'executeur que l'arbre est généré.
-    }
 
     //Permet d'ajouter un élément entré par l'utilisateur dans la zone de texte.
     @FXML
@@ -64,6 +44,18 @@ public class ArbreAVLController {
         tracer_aAVL(aavl);
     }
 
+    //Méthode appelé pour chercher un élément dans l'arbre
+    @FXML
+    private void chercherElem(ActionEvent event) {
+        int numbre=Integer.parseInt(champ_text1.getText());
+        if(ArbreAVL.chercher(aavl,numbre)){
+            tracer_aAVL(aavl,numbre);
+            label.setText("le nombre "+numbre+" a été trouvé");
+        }
+        else label.setText("Ce nombre n'existe pas dans l'arbre");
+
+    }
+
     //Permet de supprimer un élément, entré par l'utilisateur, de l'arbre.
     @FXML
     private void supprimerElem() {
@@ -71,10 +63,10 @@ public class ArbreAVLController {
         if(ArbreAVL.chercher(aavl,numbre)){
             aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
             tracer_aAVL(aavl);
-            label.setText("Le nombre à été supprimé");      //Informe que la valeur a été supprimée.
+            label.setText("La valeur à été supprimé");      //Informe que la valeur a été supprimée.
         }
         //Si elle n'existe pas dans l'arbre, l'utilisateur est informé.
-        else label.setText("Ce nombre n'existe pas dans l'arbre");
+        else label.setText("Cette valeur n'existe pas dans l'arbre");
     }
 
     //Permet d'effacer l'arbre généré.
@@ -82,17 +74,10 @@ public class ArbreAVLController {
     private void reinitialiserArbre() {
         aavl = null;
         pan.getChildren().clear();
-        label.setText("L'arbre a été rénisialisée");
+        label.setText("L'arbre a été réinitialisé");
     }
 
-
-    private void tracer_aAVL(ArbreAVL a){
-        if(a != null){
-            pan.getChildren().clear();
-            tracer_aAVL(0,(float)pan.getWidth()-20,a,40);
-        }
-    }
-
+    //récupère la position
     private float position(float x1, float x2, ArbreAVL a){
         int nbFeuille = ArbreAVL.GetnbFeuille(a);
         if(nbFeuille == 0)
@@ -104,11 +89,28 @@ public class ArbreAVLController {
         return ((nbFeuilleG*100/nbFeuille)*(x2-x1)/100 + x1) ;
     }
 
+    private void tracer_aAVL(ArbreAVL a){
+        if(a != null){
+            pan.getChildren().clear();
+            tracer_aAVL(0,(float)pan.getWidth()-20,a,40);
+        }
+    }
+
+    private void tracer_aAVL(ArbreAVL a,Comparable o) {
+        if (a != null) {
+            pan.getChildren().clear();
+            if (o == null)
+                tracer_aAVL(0, (float) pan.getWidth() - 20, a, 40);
+            else
+                tracer_after_search(0, (float) pan.getWidth() - 20, a, 40, o);
+        }
+    }
+
     //Fonction permettant de tracer l'arbre
     private float tracer_aAVL(float x1,float x2,ArbreAVL a,float y){
         float xd, xg;
         float x = position(x1, x2, a);
-        //après le calcule de la postion du noeud actuel je trace la cercle
+        //après le calcule de la postion du noeud actuel je trace la cercle avec son contenu
         tracer_cercle(x,y,a.contenu);
 
         if( a.filsD != null){
@@ -124,7 +126,7 @@ public class ArbreAVLController {
         return x;
     }
 
-    //Permet de montrer la valeur cherchée.
+    //Permet d'indiquer la valeur recherchée.
     private float tracer_after_search(float x1,float x2,ArbreAVL a,float y,Comparable o){
         float xd, xg;
         float x = position(x1, x2, a);
@@ -151,7 +153,7 @@ public class ArbreAVLController {
         return x;
     }
 
-    //Permet de créer le cercle autour de la valeur.
+    //Fonction FX, permettant l'affichage d'un cercle
     private void tracer_cercle(float x,float y,Comparable info){
         Circle cercle=new Circle(x,y,15);
         Label label = new Label(""+info);
@@ -164,7 +166,7 @@ public class ArbreAVLController {
         pan.getChildren().add(label);
     }
 
-    //Permet de montrer le lien entre les valeurs par un trait.
+    //Fonction FX, permettant l'affichage d'une droite a partir de 2 point A(x1,y1) et B(x2,y2)
     private void tracer_droite(float x1,float y1,float x2,float y2){
         Line line = new Line();
         line.setStartX(x1);

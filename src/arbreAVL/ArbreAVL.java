@@ -13,7 +13,7 @@ public class ArbreAVL{
         this.haut= 1 + Math.max(hauteur(filsG), hauteur(filsD));
     }
 
-    // Initialise le contenu à vide.
+    // Initialise le contenu de l'arbre (à vide).
     public ArbreAVL(Comparable c){
         this(c,null,null);
     }
@@ -21,17 +21,8 @@ public class ArbreAVL{
     // Permet de donner la hauteur d'une branche à partir d'une feuille donnée.
     public static int hauteur(ArbreAVL a){
         if(a== null) return -1;
-        // Fonction qui permet de calculer le Max de deux valeurs.
         return 1+Math.max(hauteur(a.filsG),hauteur(a.filsD));
     }
-
-    /*
-    public static void prefixe(ArbreAVL a){
-        if (a!=null) {
-            System.out.print(a.contenu +" "); prefixe(a.filsG); prefixe(a.filsD);
-        }
-    }
-    */
 
     // Permet de calculer la hauteur de l'arbre.
     private static void calculerHauteur(ArbreAVL a){
@@ -64,7 +55,7 @@ public class ArbreAVL{
             if (hauteur(a.filsG.filsG) < hauteur(a.filsG.filsD))
                 a.filsG= equilbreG(a.filsG);
             return equilibreD(a);
-        } // else
+        }
         if (hauteur(a.filsG)-hauteur(a.filsD) == -2)
         {
             if (hauteur(a.filsD.filsD) < hauteur(a.filsD.filsG))
@@ -82,7 +73,7 @@ public class ArbreAVL{
     }
 
     // Permet d'insérer une valeur demandée :
-    public static ArbreAVL inserer(ArbreAVL a, Comparable x){
+    public static ArbreAVL inserer(ArbreAVL a, Comparable<Integer> x){
         // Si l'arbre est vide alors on en créé un avec comme première valeur x.
         if (a == null)
             return new ArbreAVL(x);
@@ -99,7 +90,7 @@ public class ArbreAVL{
     }
 
     // On supprime une valeur demandée :
-    public static ArbreAVL supprimer(ArbreAVL a, Comparable x){
+    public static ArbreAVL supprimer(ArbreAVL a, Comparable<Integer> x){
 
         // On vérifie que la valeur entrée est égale à une valeur de l'abre si non on la retourne.
 
@@ -115,7 +106,7 @@ public class ArbreAVL{
     }
 
     // Permet de chercher une valeur demandée :
-    public static boolean chercher(ArbreAVL a , Comparable x){
+    public static boolean chercher(ArbreAVL a , Comparable<Integer> x){
         //On vérifie que la valeur demandée est présente dans l'arbre. Si oui, on la trouve, si non, on retourne faux.
         if(a== null)
             return false;
