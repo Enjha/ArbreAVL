@@ -5,15 +5,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("aavl.fxml"));
-        primaryStage.getIcons().add(new Image("avl.png"));
+        primaryStage.getIcons().add(new Image("ressources/avl.png"));
         primaryStage.setScene(new Scene(root, 1000, 650));
         primaryStage.setResizable(false);
         primaryStage.show();

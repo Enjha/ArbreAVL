@@ -16,7 +16,7 @@
                 <RowConstraints maxHeight="505.0" minHeight="10.0" prefHeight="505.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="144.0" prefWidth="798.0"
-                        style="-fx-background-color: #fff">
+                        style="-fx-background-color: #34495e">
                 <TextField fx:id="champ_text1" layoutX="380.0" layoutY="30.0" prefHeight="25.0"
                            prefWidth="70.0" promptText="ex: 25"/>
 
@@ -49,15 +49,14 @@
                         text="Effacer l'arbre"/>
 
             </AnchorPane>
-
-            <AnchorPane fx:id="panel" prefHeight="360.0" prefWidth="1000.0" GridPane.rowIndex="1">
-                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="324.0"
+            <AnchorPane fx:id="panel" prefHeight="460.0" prefWidth="1000.0" GridPane.rowIndex="1">
+                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="460.0"
                             prefWidth="1000.0" AnchorPane.bottomAnchor="0.0"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                            AnchorPane.topAnchor="0.0">
+                            AnchorPane.topAnchor="-100.0">
                     <AnchorPane fx:id="pan" minHeight="0.0" minWidth="0.0"
-                                prefHeight="351.0" prefWidth="998.0"
-                                style="-fx-background-color: white;"/>
+                                prefHeight="460.0" prefWidth="1000.0"
+                                style="-fx-background-color: #ecf0f1;"/>
                 </ScrollPane>
             </AnchorPane>
         </GridPane>

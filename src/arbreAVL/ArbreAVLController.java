@@ -151,7 +151,7 @@ public class ArbreAVLController {
         float x = position(x1, x2, a);
 
         if(a.contenu.equals(o)) {
-            ImageView im = new ImageView(new Image("new.gif"));
+            ImageView im = new ImageView(new Image("ressources/new.gif"));
             im.setFitHeight(30);
             im.setFitWidth(30);
             im.setLayoutX(x-15);
