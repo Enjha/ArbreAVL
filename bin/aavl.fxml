@@ -18,21 +18,21 @@
             </rowConstraints>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="144.0" prefWidth="798.0"
                         style="-fx-background-color: #fff">
-                <TextInput fx:id="champ_text1" layoutX="360.0" layoutY="17.0" prefHeight="25.0"
+                <TextField fx:id="champ_text1" layoutX="380.0" layoutY="30.0" prefHeight="25.0"
                            prefWidth="70.0" promptText="ex: 25"/>
 
-                <Button fx:id="btn11" text="add" layoutX="430.0" layoutY="70.0" mnemonicParsing="false"
-                        onAction="#ajouterElem" prefHeight="40.0" prefWidth="60.0"
+                <Button fx:id="btn11" text="add" layoutX="460.0" layoutY="20.0" mnemonicParsing="false"
+                        onAction="#ajouterElem" prefHeight="40.0" prefWidth="70.0"
                         style="-fx-background-color: #26bd4d;" textFill="white">
                 </Button>
 
-                <Button fx:id="btn12" text="search" layoutX="430.0" layoutY="17.0" mnemonicParsing="false"
+                <Button fx:id="btn12" text="search" layoutX="380.0" layoutY="80.0" mnemonicParsing="false"
                         onAction="#chercherElem" prefHeight="40.0" prefWidth="70.0"
                         style="-fx-background-color: #2980b9;" textFill="white">
                 </Button>
 
-                <Button fx:id="btn13" text="remove" layoutX="326.0" layoutY="70.0" mnemonicParsing="false"
-                        onAction="#supprimerElem" prefHeight="40.0" prefWidth="60.0"
+                <Button fx:id="btn13" text="remove" layoutX="300.0" layoutY="20.0" mnemonicParsing="false"
+                        onAction="#supprimerElem" prefHeight="40.0" prefWidth="70.0"
                         style="-fx-background-color: #f93b1c;-fx-border-radius:24.0"
                         textFill="white">
                 </Button>
