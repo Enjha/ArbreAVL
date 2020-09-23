@@ -3,6 +3,7 @@ package arbreAVL;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,6 +39,12 @@ public class ArbreAVLController {
     //Permet d'ajouter un élément entré par l'utilisateur dans la zone de texte.
     @FXML
     private void ajouterElem() {
+        if(champ_text1.getText().equals("")){
+            Alert care = new Alert(Alert.AlertType.WARNING);
+            care.setContentText("Veuillez entrer une valeur !");
+            care.show();
+            return;
+        }
         int numbre=Integer.parseInt(champ_text1.getText()); //Récupère le texte entré par l'utilisateur.
         aavl = ArbreAVL.inserer(aavl,numbre);               //Insère la valeur.
         label.setText("le nombre "+numbre+" a été ajouté"); //Informe que la valeur a été ajoutée.
@@ -47,6 +54,12 @@ public class ArbreAVLController {
     //Méthode appelé pour chercher un élément dans l'arbre
     @FXML
     private void chercherElem(ActionEvent event) {
+        if(champ_text1.getText().equals("")){
+            Alert care = new Alert(Alert.AlertType.WARNING);
+            care.setContentText("Veuillez entrer une valeur !");
+            care.show();
+            return;
+        }
         int numbre=Integer.parseInt(champ_text1.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
             tracer_aAVL(aavl,numbre);
@@ -59,6 +72,12 @@ public class ArbreAVLController {
     //Permet de supprimer un élément, entré par l'utilisateur, de l'arbre.
     @FXML
     private void supprimerElem() {
+        if(champ_text1.getText().equals("")){
+            Alert care = new Alert(Alert.AlertType.WARNING);
+            care.setContentText("Veuillez entrer une valeur !");
+            care.show();
+            return;
+        }
         int numbre=Integer.parseInt(champ_text1.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
             aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
