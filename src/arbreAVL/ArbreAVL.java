@@ -25,14 +25,6 @@ public class ArbreAVL{
         return 1+Math.max(hauteur(a.filsG),hauteur(a.filsD));
     }
 
-    /*
-    public static void prefixe(ArbreAVL a){
-        if (a!=null) {
-            System.out.print(a.contenu +" "); prefixe(a.filsG); prefixe(a.filsD);
-        }
-    }
-    */
-
     // Permet de calculer la hauteur de l'arbre.
     private static void calculerHauteur(ArbreAVL a){
         if(a!=null){
