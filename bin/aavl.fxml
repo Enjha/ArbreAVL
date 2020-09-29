@@ -37,7 +37,7 @@
                 </Button>
 
 
-                <Label fx:id="label" layoutX="820.0" layoutY="75" prefHeight="25.0" prefWidth="226.0"
+                <Label fx:id="label" layoutX="10.0" layoutY="25" prefHeight="25.0" prefWidth="226.0"
                        textAlignment="CENTER" textFill="#e81212">
                     <font>
                         <Font name="System Bold" size="13.0"/>
@@ -45,7 +45,7 @@
                 </Label>
 
                 <Button fx:id="btn3" layoutX="840.0" layoutY="17.0" mnemonicParsing="false"
-                        onAction="#reinitialiserArbre" prefHeight="40.0" prefWidth="110.0"
+                        onAction="#reinitialiserArbre" prefHeight="40.0" prefWidth="140.0"
                         text="Effacer l'arbre"/>
 
             </AnchorPane>

@@ -47,7 +47,7 @@ public class ArbreAVLController {
         }
         int numbre=Integer.parseInt(champ_text1.getText()); //Récupère le texte entré par l'utilisateur.
         aavl = ArbreAVL.inserer(aavl,numbre);               //Insère la valeur.
-        label.setText("le nombre "+numbre+" a été ajouté"); //Informe que la valeur a été ajoutée.
+        label.setText("Le nombre "+numbre+" a été ajouté !"); //Informe que la valeur a été ajoutée.
         tracer_aAVL(aavl);
     }
 
@@ -63,9 +63,9 @@ public class ArbreAVLController {
         int numbre=Integer.parseInt(champ_text1.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
             tracer_aAVL(aavl,numbre);
-            label.setText("le nombre "+numbre+" a été trouvé");
+            label.setText("Le nombre "+numbre+" a été trouvé ! ");
         }
-        else label.setText("Ce nombre n'existe pas dans l'arbre");
+        else label.setText("Ce nombre n'existe pas dans l'arbre.");
 
     }
 
@@ -82,11 +82,11 @@ public class ArbreAVLController {
         if(ArbreAVL.chercher(aavl,numbre)){
             aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
             tracer_aAVL(aavl);
-            label.setText("La valeur à été supprimé");      //Informe que la valeur a été supprimée.
+            label.setText("La valeur à été supprimé.");      //Informe que la valeur a été supprimée.
         }
 
         //Si elle n'existe pas dans l'arbre, l'utilisateur est informé.
-        else label.setText("Cette valeur n'existe pas dans l'arbre");
+        else label.setText("Cette valeur n'existe pas dans l'arbre.");
     }
 
     //Permet d'effacer l'arbre généré.
@@ -94,7 +94,7 @@ public class ArbreAVLController {
     private void reinitialiserArbre() {
         aavl = null;
         pan.getChildren().clear();
-        label.setText("L'arbre a été réinitialisé");
+        label.setText("L'arbre a été réinitialisé.");
     }
 
     //récupère la position
@@ -152,11 +152,11 @@ public class ArbreAVLController {
         float x = position(x1, x2, a);
 
         if(a.contenu.equals(o)) {
-            ImageView im = new ImageView(new Image("ressources/new.gif"));
+            ImageView im = new ImageView(new Image("ressources/Flèche.jpg"));
             im.setFitHeight(30);
             im.setFitWidth(30);
             im.setLayoutX(x-15);
-            im.setLayoutY(y-35);
+            im.setLayoutY(y-40);
             pan.getChildren().addAll(im);
         }
         tracer_cercle(x,y,a.contenu);
@@ -176,12 +176,14 @@ public class ArbreAVLController {
     //Fonction FX, permettant l'affichage d'un cercle
     private void tracer_cercle(float x,float y,Comparable info){
         Circle cercle=new Circle(x,y,15);
+        cercle.setStroke(Color.BLACK);
+        cercle.setFill(null);
         Label label = new Label(""+info);
         if(Integer.parseInt(info.toString())<100)
-            label.setLayoutX(x-6);
-        else  label.setLayoutX(x-9);
-        label.setLayoutY(y-9);
-        label.setTextFill(Color.WHITE);
+            label.setLayoutX(x-8);
+        else  label.setLayoutX(x-12);
+        label.setLayoutY(y-10);
+        label.setTextFill(Color.BLACK);
         pan.getChildren().add(cercle);
         pan.getChildren().add(label);
     }
