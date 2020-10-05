@@ -6,6 +6,8 @@ public class ArbreAVL{
     int haut;
     ArbreAVL filsG,filsD;
 
+    //Création de l'objet arbre.
+    //Il possède un contenu, un fils gauche, fils droite et une hauteur.
     ArbreAVL(Comparable c, ArbreAVL filsG, ArbreAVL filsD){
         this.contenu = c;
         this.filsG= filsG;
@@ -25,48 +27,54 @@ public class ArbreAVL{
         return 1+Math.max(hauteur(a.filsG),hauteur(a.filsD));
     }
 
-    // Permet de calculer la hauteur de l'arbre.
-    private static void calculerHauteur(ArbreAVL a){
-        if(a!=null){
-            calculerHauteur(a.filsG);
-            calculerHauteur(a.filsD);
-            // Fonction qui permet de calculer le Max de deux valeurs.
-            a.haut= 1 + Math.max(hauteur(a.filsG), hauteur(a.filsD));
-        }
-    }
-
     // Si l'arbre est déséquilibré à gauche alors :
     private static ArbreAVL equilbreG(ArbreAVL a){
+        //Met sous forme d'ensemble comme dans les exemple afin de ne pas perdre les sous arbres.
         ArbreAVL b= a.filsD;
         ArbreAVL c = new ArbreAVL(a.contenu, a.filsG, b.filsG);
+        //Effectue le changement de place.
         return new ArbreAVL(b.contenu,c,b.filsD);
     }
+
     private static ArbreAVL equilibreD(ArbreAVL a){
+        //Met sous forme d'ensemble comme dans les exemple afin de ne pas perdre les sous arbres.
         ArbreAVL c = a.filsG;
         ArbreAVL b = new ArbreAVL(a.contenu, c.filsD, a.filsD);
+        //Effectue le changement de place.
         return new ArbreAVL(c.contenu, c.filsG,b);
     }
     private static ArbreAVL equilibrer(ArbreAVL a){
-        calculerHauteur(a);
-        // On compare la hauteur à partir d'une racine afin de vérifier si elle est équilibrée ou non.
-        // Si elle ne l'est pas, alors on effectue l'équilibrage grâce aux fonctions ci-dessus suivant si elles sont
-        // déséquilibrée par la gauche ou la droite.
+        //Calcule la hauteur.
+        hauteur(a);
+        // On compare la hauteur à partir d'un noeud afin de vérifier si elle est équilibrée ou non.
+        // Si elle ne l'est pas, alors on effectue l'équilibrage grâce aux fonctions ci-dessus.
+
+        //On vérifie si le déséquilibrage se situe à gauche.
         if (hauteur(a.filsG) -hauteur(a.filsD) == 2)
         {
+            //On vérifie ici si elles sont déséquilibrées par la l'extérieur ou l'intérieur).
+            //Si à l'extérieur :
             if (hauteur(a.filsG.filsG) < hauteur(a.filsG.filsD))
                 a.filsG= equilbreG(a.filsG);
+            //Si à l'intérieur :
             return equilibreD(a);
-        } // else
+        }
+
+        //On vérifie si le déséquilibrage se situe à droite.
         if (hauteur(a.filsG)-hauteur(a.filsD) == -2)
         {
+            //On vérifie ici si elles sont déséquilibrées par la l'extérieur ou l'intérieur).
+            //Si à l'extérieur :
             if (hauteur(a.filsD.filsD) < hauteur(a.filsD.filsG))
                 a.filsD= equilibreD(a.filsD);
+            //Si à l'intérieur :
             return equilbreG(a);
         }
+        //S'il n'y a pas de déséquilibre, alors on return l'arbre.
         return a;
     }
 
-    // Permet de donner le nombre de feuille de l'abre AVL.
+    // Permet de donner le nombre de feuille de l'abre AVL. Sert pour la partie graphique.
     public static int GetnbFeuille(ArbreAVL r){
         if(r==null)
             return 0;
@@ -87,22 +95,28 @@ public class ArbreAVL{
             a.filsD= inserer(a.filsD,x);
 
         // On lance la fonction équilibrage afin d'équilibré si nécessaire.
+
+        // A VERIFIER, SI TAILLE DE L'ARBRE + 1 ALORS NE PAS BESOIN D'EQUILIBRER !
         return equilibrer(a);
+
     }
 
     // On supprime une valeur demandée :
     public static ArbreAVL supprimer(ArbreAVL a, Comparable x){
 
         // On vérifie que la valeur entrée est égale à une valeur de l'abre si non on la retourne.
-
+        //Si la valeur qu'on veut supprimer est la racine, c'est unc as particulier, voir fonction en dessous "supprimerRacine"
         if(a.contenu.compareTo(x)==0)
             return supprimerRacine(a);
+        //Ces conditions permettent de prendre tous les cas possibles en considération.
         if(a.contenu.compareTo(x) > 0)
             a.filsG=supprimer(a.filsG,x);
         else
             a.filsD=supprimer(a.filsD,x);
 
         // Après la suppression, on l'équilibre de nouveau.
+
+        // A VERIFIER, SI TAILLE DE L'ARBRE -1 ALORS NE PAS BESOIN D'EQUILIBRER !
         return equilibrer(a);
     }
 
@@ -111,15 +125,17 @@ public class ArbreAVL{
         //On vérifie que la valeur demandée est présente dans l'arbre. Si oui, on la trouve, si non, on retourne faux.
         if(a== null)
             return false;
+        //Vérifie pour toutes les valeurs >=0.
         if(a.contenu.compareTo(x)==0)
             return true;
         if(a.contenu.compareTo(x) < 0)
             return chercher(a.filsD, x);
-
+        //On return la valeur trouvée.
         return chercher(a.filsG, x);
     }
 
-    // Permet de supprimer la racine de l'arbre AVL :
+
+    // PAS COMPRIS :''''''( !!!
     private static ArbreAVL supprimerRacine(ArbreAVL a){
         // Si elle n'a pas de fils gauche, on retourne le fils droit.
         if(a.filsG==null)
@@ -130,7 +146,7 @@ public class ArbreAVL{
 
         ArbreAVL r1 = a.filsG;
         ArbreAVL pere= a;
-        // Recherche du plus grand élément du sous arbre gauche afin de le placer en racine.
+        // A EXPLIQUER !!!!
         while(r1.filsD != null) {
             pere= r1;
             r1 = r1.filsD;
@@ -141,6 +157,7 @@ public class ArbreAVL{
         else
             pere.filsD=r1.filsG;
         return a;
+        //CA NE SUPPRIME PAS LA VALEUR DE L'ARBRE GRAPHIQUEMENT PARLANT !!! :'(
     }
 
 }

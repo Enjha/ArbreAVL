@@ -1,4 +1,6 @@
 
+//Cette classe permet le controle de l'interface graphique de l'application.
+
 package arbreAVL;
 
 import javafx.event.ActionEvent;
@@ -105,6 +107,7 @@ public class ArbreAVLController {
         label.setText("L'arbre a été réinitialisé.");
     }
 
+
     //récupère la position
     private float position(float x1, float x2, ArbreAVL a){
         int nbFeuille = ArbreAVL.GetnbFeuille(a);
@@ -120,7 +123,7 @@ public class ArbreAVLController {
     private void tracer_aAVL(ArbreAVL a){
         if(a != null){
             pan.getChildren().clear();
-            tracer_aAVL(0,(float)pan.getWidth()-20,a,40);
+            tracer_aAVL(20,(float)pan.getWidth()-20,a,40);
         }
     }
 
@@ -128,7 +131,7 @@ public class ArbreAVLController {
         if (a != null) {
             pan.getChildren().clear();
             if (o == null)
-                tracer_aAVL(0, (float) pan.getWidth() - 20, a, 40);
+                tracer_aAVL(0, (float) pan.getWidth()/2, a, 40);
             else
                 tracer_after_search(0, (float) pan.getWidth() - 20, a, 40, o);
         }
@@ -147,7 +150,7 @@ public class ArbreAVLController {
         }
 
         if(a.filsG !=null){
-            xg =tracer_aAVL(x1, x, a.filsG, y+50);
+            xg =tracer_aAVL(x1+20, x-50, a.filsG, y+50);
             tracer_droite(x-15, y+8, xg, y+35);
         }
 
