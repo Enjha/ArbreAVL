@@ -83,6 +83,7 @@ public class ArbreAVL{
 
     // Permet d'insérer une valeur demandée :
     public static ArbreAVL inserer(ArbreAVL a, Comparable x){
+        int h = hauteur(a);
         // Si l'arbre est vide alors on en créé un avec comme première valeur x.
         if (a == null)
             return new ArbreAVL(x);
@@ -96,14 +97,17 @@ public class ArbreAVL{
 
         // On lance la fonction équilibrage afin d'équilibré si nécessaire.
 
-        // A VERIFIER, SI TAILLE DE L'ARBRE + 1 ALORS NE PAS BESOIN D'EQUILIBRER !
-        return equilibrer(a);
+        //Si la hauteur de la taille est modifiée alors pas besoin d'équilibrer.
+        if(h == a.haut)
+            return a;
+        else
+            return equilibrer(a);
 
     }
 
     // On supprime une valeur demandée :
     public static ArbreAVL supprimer(ArbreAVL a, Comparable x){
-
+        int h = hauteur(a);
         // On vérifie que la valeur entrée est égale à une valeur de l'abre si non on la retourne.
         //Si la valeur qu'on veut supprimer est la racine, c'est unc as particulier, voir fonction en dessous "supprimerRacine"
         if(a.contenu.compareTo(x)==0)
@@ -115,9 +119,11 @@ public class ArbreAVL{
             a.filsD=supprimer(a.filsD,x);
 
         // Après la suppression, on l'équilibre de nouveau.
-
-        // A VERIFIER, SI TAILLE DE L'ARBRE -1 ALORS NE PAS BESOIN D'EQUILIBRER !
-        return equilibrer(a);
+        //Si la hauteur de la taille est modifiée alors pas besoin d'équilibrer.
+        if(h == a.haut)
+            return a;
+        else
+            return equilibrer(a);
     }
 
     // Permet de chercher une valeur demandée :

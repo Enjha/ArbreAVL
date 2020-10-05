@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -178,7 +179,7 @@ public class ArbreAVLController {
         }
 
         if(a.filsG !=null){
-            xg =tracer_after_search(x1, x, a.filsG, y+50,o);
+            xg =tracer_after_search(x1+20, x-50, a.filsG, y+50,o);
             tracer_droite(x-15, y+8, xg, y+35);
         }
         return x;
