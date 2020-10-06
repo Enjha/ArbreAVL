@@ -143,16 +143,14 @@ public class ArbreAVL{
 
     // Permet de supprimer la racine
     private static ArbreAVL supprimerRacine(ArbreAVL a){
-        // Si elle n'a pas de fils gauche, on retourne le fils droit.
+        // On vérifié d'abord l'éxistence d'un/de fils droit/gauche, dans le cas ou il n'y en a pas c'est un cas particulier a traiter
         if(a.filsG==null)
             return a.filsD;
-        // Si elle n'a pas de fils droit, on retourne le fils gauche.
         if(a.filsD==null)
             return a.filsG;
 
         ArbreAVL r1 = a.filsG;
-        ArbreAVL pere= a;
-        // A EXPLIQUER !!!!
+        ArbreAVL pere = a; //on sauvegarde la valeur de l'arbreAVL "a" dans une variable temporaire "pere"
         while(r1.filsD != null) {
             pere= r1;
             r1 = r1.filsD;
