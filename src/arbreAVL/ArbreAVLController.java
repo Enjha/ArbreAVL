@@ -1,5 +1,5 @@
 
-//Cette classe permet le controle de l'interface graphique de l'application.
+//Cette classe permet de gérer l'interface graphique de l'application.
 
 package arbreAVL;
 
@@ -38,6 +38,7 @@ public class ArbreAVLController {
         }
         int numbre=Integer.parseInt(valueField.getText()); //Récupère le texte entré par l'utilisateur.
         aavl = ArbreAVL.inserer(aavl,numbre);               //Insère la valeur.
+        label.setStyle("-fx-text-fill: #4cd137;");
         label.setText("Le nombre "+numbre+" a été ajouté !"); //Informe que la valeur a été ajoutée.
         tracer_aAVL(aavl);
     }
@@ -54,9 +55,10 @@ public class ArbreAVLController {
         int numbre=Integer.parseInt(valueField.getText());
         if(ArbreAVL.chercher(aavl,numbre)){
             tracer_aAVL(aavl,numbre);
+            label.setStyle("-fx-text-fill: #4cd137;");
             label.setText("Le nombre "+numbre+" a été trouvé ! ");
         }
-        else label.setText("Ce nombre n'existe pas dans l'arbre.");
+        else {label.setStyle("-fx-text-fill: red;");label.setText("Ce nombre n'existe pas dans l'arbre.");}
 
     }
 
@@ -73,11 +75,12 @@ public class ArbreAVLController {
         if(ArbreAVL.chercher(aavl,numbre)){
             aavl = ArbreAVL.supprimer(aavl,numbre);         //Supprime la valeur entrée dans la zone de texte.
             tracer_aAVL(aavl);                              //Retrace l'arbre sans la valeur supprimé.
-            label.setText("La valeur à été supprimé.");      //Informe que la valeur a été supprimée.
+            label.setStyle("-fx-text-fill: #4cd137;");
+            label.setText("La valeur à été supprimé.");     //Informe que la valeur a été supprimée.
         }
 
         //Si elle n'existe pas dans l'arbre, l'utilisateur est informé.
-        else label.setText("Cette valeur n'existe pas dans l'arbre.");
+        else{ label.setStyle("-fx-text-fill: red;"); label.setText("Cette valeur n'existe pas dans l'arbre.");}
     }
 
     //Permet d'effacer l'arbre généré.
@@ -85,6 +88,7 @@ public class ArbreAVLController {
     private void reinitialiserArbre() {
         aavl = null;
         pan.getChildren().clear();
+        label.setStyle("-fx-text-fill: #4cd137;");
         label.setText("L'arbre a été réinitialisé.");
     }
 

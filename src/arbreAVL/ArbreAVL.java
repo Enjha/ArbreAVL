@@ -141,23 +141,22 @@ public class ArbreAVL{
     }
 
 
-    // PAS COMPRIS :''''''( !!!
     private static ArbreAVL supprimerRacine(ArbreAVL a){
         // Si elle n'a pas de fils gauche, on retourne le fils droit en tant que nouvelle racine.
         if(a.filsG==null)
             return a.filsD;
         // Si elle n'a pas de fils droit, on retourne le fils gauche en ntant que nouvelle racine.
-        if(a.filsD==null)
+        if(a.filsD==null) {
             return a.filsG;
+        }
 
-        // pk???
         ArbreAVL r1 = a.filsG;
         ArbreAVL pere= a;
 
-        //???????
+        //tant qu'on atteint la valeur la plus a droite de la branche de Gauche de l'arbre principale
         while(r1.filsD != null) {
-            pere= r1;
-            r1 = r1.filsD;
+            pere= r1;    // on réaffecte le vrai père du fils tant que l'on descend d'un étage
+            r1 = r1.filsD; // on réaffecte aussi l'arbre temporaire
         }
         a.contenu=r1.contenu;
         if(pere == a)
@@ -165,7 +164,6 @@ public class ArbreAVL{
         else
             pere.filsD=r1.filsG;
         return a;
-        //CA NE SUPPRIME PAS LA VALEUR DE L'ARBRE GRAPHIQUEMENT PARLANT !!! :'(
     }
 
 }
