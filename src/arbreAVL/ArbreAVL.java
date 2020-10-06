@@ -109,7 +109,7 @@ public class ArbreAVL{
     public static ArbreAVL supprimer(ArbreAVL a, Comparable x){
         int h = hauteur(a);
         // On vérifie que la valeur entrée est égale à une valeur de l'abre si non on la retourne.
-        //Si la valeur qu'on veut supprimer est la racine, c'est unc as particulier, voir fonction en dessous "supprimerRacine"
+        //Si la valeur qu'on veut supprimer est la racine, c'est un cas particulier, voir fonction en dessous "supprimerRacine"
         if(a.contenu.compareTo(x)==0)
             return supprimerRacine(a);
         //Ces conditions permettent de prendre tous les cas possibles en considération.
@@ -119,7 +119,7 @@ public class ArbreAVL{
             a.filsD=supprimer(a.filsD,x);
 
         // Après la suppression, on l'équilibre de nouveau.
-        //Si la hauteur de la taille est modifiée alors pas besoin d'équilibrer.
+        //Si la hauteur de l'arbre est modifié alors pas besoin de rééquilibrage.
         if(h == a.haut)
             return a;
         else
@@ -141,7 +141,7 @@ public class ArbreAVL{
     }
 
 
-    // PAS COMPRIS :''''''( !!!
+    // Permet de supprimer la racine
     private static ArbreAVL supprimerRacine(ArbreAVL a){
         // Si elle n'a pas de fils gauche, on retourne le fils droit.
         if(a.filsG==null)
@@ -163,7 +163,6 @@ public class ArbreAVL{
         else
             pere.filsD=r1.filsG;
         return a;
-        //CA NE SUPPRIME PAS LA VALEUR DE L'ARBRE GRAPHIQUEMENT PARLANT !!! :'(
     }
 
 }
