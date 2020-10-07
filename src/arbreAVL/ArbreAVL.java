@@ -150,6 +150,7 @@ public class ArbreAVL{
             return a.filsG;
         }
 
+        //On initialise a -> père et r1 -> fils
         ArbreAVL r1 = a.filsG;
         ArbreAVL pere= a;
 
@@ -158,11 +159,17 @@ public class ArbreAVL{
             pere= r1;    // on réaffecte le vrai père du fils tant que l'on descend d'un étage
             r1 = r1.filsD; // on réaffecte aussi l'arbre temporaire
         }
+        //Quand filsD null, on affecte au contenu de a le contenu de r1 qui est la valeur la plus à droite de la branche gauche
+        //Qui est donc la plus grande valeur de la branche gauche.
         a.contenu=r1.contenu;
+
+        //Si pere = a, nous ne sommes pas entré dans le while, donc le fils gauche devient le sous fils gauche.
         if(pere == a)
             pere.filsG=r1.filsG;
+        //Si non le fils droit devient le sous fils gauche.
         else
             pere.filsD=r1.filsG;
+        //On return l'arbre.
         return a;
     }
 
